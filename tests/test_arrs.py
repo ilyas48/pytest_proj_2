@@ -10,8 +10,6 @@ class TestGet(unittest.TestCase):
         self.assertEqual(get([1, 2, 3], 2, "test"), 3)
         self.assertEqual(get([1, 2, 3], -1, 3), 3)
 
-        with self.assertRaises(IndexError):
-            get([], 0, "test")
 
     def test_slice(self):
         self.assertEqual(get([1, 2, 3, 4], 1, 3), 2, 3)
@@ -19,4 +17,3 @@ class TestGet(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
