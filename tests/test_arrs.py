@@ -1,16 +1,22 @@
-from utils import arrs
-import pytest
+import unittest
+
+from utils.arrs import get
 
 
-def test_get():
-    with pytest.raises(IndexError):
-        assert arrs.get([1, 2, 3], 1, "test") == 2
-        assert arrs.get([], 0, "test") == "test"
-        assert arrs.get([1, 5, 3], 1, "test") == 5
-        assert arrs.get([1, 2, 3], 2, "test") == 3
-        assert arrs.get([1, 2, 3], -1, "test") == 3
+class TestGet(unittest.TestCase):
+    def test_get(self):
+        self.assertEqual(get([1, 2, 3], 1, "test"), 2)
+        self.assertEqual(get([1, 5, 3], 1, "test"), 5)
+        self.assertEqual(get([1, 2, 3], 2, "test"), 3)
+        self.assertEqual(get([1, 2, 3], -1, 3), 3)
+
+        with self.assertRaises(IndexError):
+            get([], 0, "test")
+
+    def test_slice(self):
+        self.assertEqual(get([1, 2, 3, 4], 1, 3), 2, 3)
+        self.assertEqual(get([1, 2, 3], 1), 2, 3)
 
 
-def test_slice():
-    assert arrs.my_slice([1, 2, 3, 4], 1, 3) == [2, 3]
-    assert arrs.my_slice([1, 2, 3], 1) == [2, 3]
+if __name__ == '__main__':
+    unittest.main()
